@@ -68,8 +68,10 @@ esttab . using tables/sumstat.tex, cells("mean sd min max") label tex replace
 tab educ if !female
 ** make a scatter plot showing the relation between wages and schooling 
 
-twoway scatter lgwage educ, by(female) mcolor(%10)
-
+twoway scatter lgwage educ, by(female) mcolor(%70)
+histogram lgwage, by(PEIO1COW) //  Government ppl paid more
+hist PENATVTY, by(female) // Huge Class Imbalance of White ppl
+hist educ // Not many schoolers
 *** Regression ***
 regress lgwage educ exp exp2 if !female ,robust
 eststo reg_male
@@ -80,6 +82,7 @@ eststo reg_female
 reg lgwage educ exp exp2 c.female#c.educ c.female#c.exp c.female#c.exp2, robust
 eststo reg_interact
 
-
+reg lgwage c.educ##c.exp exp2 white##female
+eststo white_female
 
 
