@@ -13,6 +13,9 @@ gen employed=(WSAL_VAL>0)
 ** generate variables based on genders
 gen female = (A_SEX==2)
 gen male=(A_SEX==1)
+** generate dummies for races
+gen white = 1 if PRDTRACE == 1
+replace white = 0 if PRDTRACE != 1
 
 ** generate variable for children
 gen children=(A_HGA==0)
